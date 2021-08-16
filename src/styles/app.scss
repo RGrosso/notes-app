@@ -1,2 +1,10 @@
 @import "./variables";
 @import "../../node_modules/bootstrap/scss/bootstrap";
+
+.nav-link {
+    color: $white !important;
+}
+
+.nav-link.router-link-active {
+    color: $secondary !important;
+}
