@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg mb-3">
         <div class="container">
             <a class="navbar-brand" href="#">Notes</a>
             <button
@@ -15,7 +15,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <router-link to="/" class="nav-link"> Home </router-link>
+                    <router-link :to="{ name: 'Home' }" class="nav-link">
+                        Home
+                    </router-link>
+                    <router-link :to="{ name: 'Notes' }" class="nav-link">
+                        Notes
+                    </router-link>
                 </div>
             </div>
         </div>
