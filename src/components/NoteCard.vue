@@ -5,18 +5,18 @@
             <p class="card-text">
                 {{ note.text }}
             </p>
-            <button
-                class="text-red btn p-1"
-                @click="actions.deleteNote(note.id)"
-            >
-                <i class="fas fa-trash text-red"></i>
-            </button>
+            <IconBtn
+                @click="actions.deleteNote({ id: note.id })"
+                iconName="trash"
+                class="text-red"
+            />
         </div>
     </div>
 </template>
 
 <script>
 import { inject } from "vue";
+import IconBtn from "@/components/IconBtn.vue";
 export default {
     props: {
         note: {
@@ -24,6 +24,7 @@ export default {
             required: true,
         },
     },
+    components: { IconBtn },
     setup() {
         const { actions } = inject("store");
 

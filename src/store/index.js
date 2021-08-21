@@ -25,11 +25,21 @@ const methods = {
         };
         state.notes.push(note);
     },
-    deleteNote(id) {
+    deleteNote({ id }) {
         state.notes = state.notes.filter((n) => n.id !== id);
     },
-    updateNote() {
-        //
+    updateNote({ id, title, text }) {
+        state.notes = state.notes.map((n) => {
+            if (n.id === id) {
+                return {
+                    ...n,
+                    updatedAt: new Date(),
+                    title,
+                    text,
+                };
+            }
+            return n;
+        });
     },
     updateLocalStorage() {
         //
@@ -37,16 +47,16 @@ const methods = {
 };
 
 const actions = {
-    createNote() {
-        methods.createNote();
+    createNote(payload) {
+        methods.createNote(payload);
         methods.updateLocalStorage();
     },
-    deleteNote(id) {
-        methods.deleteNote(id);
+    deleteNote(payload) {
+        methods.deleteNote(payload);
         methods.updateLocalStorage();
     },
-    updateNote() {
-        methods.updateNote();
+    updateNote(payload) {
+        methods.updateNote(payload);
         methods.updateLocalStorage();
     },
 };
