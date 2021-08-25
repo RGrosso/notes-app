@@ -1,10 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+const Home = () => import("@/views/Home.vue");
+const Notes = () => import("@/views/Notes.vue");
+const NoteAddEdit = () => import("@/views/AddEditNoteView.vue");
+
 const routes = [
     {
         path: "/",
         name: "Home",
-        component: () => import("../views/Home.vue"),
+        component: Home,
         meta: {
             title: "Home",
         },
@@ -12,10 +16,34 @@ const routes = [
     {
         path: "/notes",
         name: "Notes",
-        component: () => import("../views/Notes.vue"),
+        component: Notes,
         meta: {
-            title: "Notes",
+            title: "All Notes",
         },
+        children: [
+            {
+                path: "new",
+                name: "New Note",
+                component: NoteAddEdit,
+                meta: {
+                    title: "Create note",
+                    onClose: () => router.push({ name: "Notes" }),
+                },
+            },
+            {
+                beforeEnter: () => {
+                    console.log("Before Note Edit Enter (Per-Route)");
+                },
+                name: "Edit Note",
+                meta: {
+                    title: "Edit note",
+                    onClose: () => router.push({ name: "Notes" }),
+                },
+                path: "edit/:id",
+                component: NoteAddEdit,
+                props: (route) => ({ id: route.params.id }),
+            },
+        ],
     },
 ];
 

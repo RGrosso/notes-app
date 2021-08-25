@@ -5,6 +5,14 @@
             <p class="card-text">
                 {{ note.text }}
             </p>
+            <p>{{ note.id }}</p>
+            <router-link
+                :to="{ name: 'Edit Note', params: { id: note.id } }"
+                custom
+                v-slot="{ navigate }"
+            >
+                <IconBtn @click="navigate" iconName="edit" class="text-blue" />
+            </router-link>
             <IconBtn
                 @click="actions.deleteNote({ id: note.id })"
                 iconName="trash"
