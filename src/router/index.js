@@ -27,17 +27,14 @@ const routes = [
                 component: NoteAddEdit,
                 meta: {
                     title: "Create note",
-                    onClose: () => router.push({ name: "Notes" }),
+                    displayInNoteModal: true,
                 },
             },
             {
-                beforeEnter: () => {
-                    console.log("Before Note Edit Enter (Per-Route)");
-                },
                 name: "Edit Note",
                 meta: {
                     title: "Edit note",
-                    onClose: () => router.push({ name: "Notes" }),
+                    displayInNoteModal: true,
                 },
                 path: "edit/:id",
                 component: NoteAddEdit,
