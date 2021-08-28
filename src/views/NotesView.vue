@@ -21,13 +21,15 @@
                 </a>
             </router-link>
 
-            <BModal
-                :id="modalId"
-                :onClose="navigateToNotes"
-                :title="router.currentRoute.value.meta.title"
-            >
-                <router-view />
-            </BModal>
+            <router-view v-slot="{ Component }">
+                <BModal
+                    :id="modalId"
+                    :onClose="navigateToNotes"
+                    :title="router.currentRoute.value.meta.title"
+                >
+                    <component :is="Component" :onClose="navigateToNotes" />
+                </BModal>
+            </router-view>
         </div>
     </div>
 </template>

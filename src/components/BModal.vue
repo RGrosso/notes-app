@@ -20,26 +20,7 @@
                         @click="() => onClose()"
                     ></button>
                 </div>
-                <div class="modal-body">
-                    <slot></slot>
-                </div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-outline-primary"
-                        data-bs-dismiss="modal"
-                        @click="() => onClose()"
-                    >
-                        Close
-                    </button>
-                    <button
-                        @click="() => onSave()"
-                        type="button"
-                        class="btn btn-primary"
-                    >
-                        Save changes
-                    </button>
-                </div>
+                <slot />
             </div>
         </div>
     </div>
@@ -57,10 +38,6 @@ export default {
             default: "",
         },
         onClose: {
-            type: Function,
-            default: () => {},
-        },
-        onSave: {
             type: Function,
             default: () => {},
         },

@@ -61,8 +61,19 @@ const actions = {
     },
 };
 
+const getters = {
+    findNoteById(id) {
+        if (state.notes.length === 0) {
+            return;
+        }
+
+        return state.notes.find((note) => note.id === id);
+    },
+};
+
 export default {
-    state: state,
+    state,
     methods,
     actions,
+    getters,
 };
