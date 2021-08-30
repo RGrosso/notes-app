@@ -27,7 +27,10 @@
                     :onClose="navigateToNotes"
                     :title="router.currentRoute.value.meta.title"
                 >
-                    <component :is="Component" :onClose="navigateToNotes" />
+                    <component
+                        :is="Component"
+                        :navigateBack="navigateToNotes"
+                    />
                 </BModal>
             </router-view>
         </div>
