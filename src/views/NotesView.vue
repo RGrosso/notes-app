@@ -2,7 +2,19 @@
     <div class="container">
         <div>
             <h1>Notes</h1>
-            <div v-if="store.state.notes.length > 0" class="mb-3">
+            <router-link
+                :to="{ name: 'New Note' }"
+                custom
+                v-slot="{ href, navigate }"
+            >
+                <a :href="href" @click="navigate" class="btn btn-primary mb-3">
+                    Create note
+                </a>
+            </router-link>
+            <div
+                v-if="store.state.notes.length > 0"
+                class="d-flex flex-gap mb-3"
+            >
                 <NoteCard
                     v-for="note in store.state.notes"
                     :key="note.id"
@@ -10,16 +22,6 @@
                 />
             </div>
             <p v-else>You currently have no notes available.</p>
-
-            <router-link
-                :to="{ name: 'New Note' }"
-                custom
-                v-slot="{ href, navigate }"
-            >
-                <a :href="href" @click="navigate" class="btn btn-primary">
-                    Create note
-                </a>
-            </router-link>
 
             <router-view v-slot="{ Component }">
                 <BModal
