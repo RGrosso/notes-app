@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 const Home = () => import("@/views/HomeView.vue");
 const Notes = () => import("@/views/NotesView.vue");
 const NoteAddEdit = () => import("@/views/AddEditNoteView.vue");
+const NoteDelete = () => import("@/views/DeleteNoteView.vue");
 
 const routes = [
     {
@@ -38,6 +39,16 @@ const routes = [
                 },
                 path: "edit/:id",
                 component: NoteAddEdit,
+                props: (route) => ({ id: route.params.id }),
+            },
+            {
+                name: "Delete Note",
+                meta: {
+                    title: "Delete note",
+                    displayInNoteModal: true,
+                },
+                path: "delete/:id",
+                component: NoteDelete,
                 props: (route) => ({ id: route.params.id }),
             },
         ],

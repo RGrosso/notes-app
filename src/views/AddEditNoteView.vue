@@ -32,7 +32,11 @@
                 </div>
             </div>
         </div>
-        <BModalFooter :onClose="navigateBack" :onSave="onSubmit" />
+        <BModalFooter
+            :onClose="navigateBack"
+            :onSubmit="onSubmit"
+            submitBtnText="Save changes"
+        />
     </div>
 </template>
 

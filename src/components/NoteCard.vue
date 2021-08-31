@@ -5,18 +5,16 @@
             <p class="card-text">
                 {{ note.text }}
             </p>
-            <router-link
-                :to="{ name: 'Edit Note', params: { id: note.id } }"
-                custom
-                v-slot="{ navigate }"
-            >
+            <router-link :to="mapTo('Edit Note')" v-slot="{ navigate }" custom>
                 <IconBtn @click="navigate" iconName="edit" class="text-blue" />
             </router-link>
-            <IconBtn
-                @click="actions.deleteNote({ id: note.id })"
-                iconName="trash"
-                class="text-red"
-            />
+            <router-link
+                :to="mapTo('Delete Note')"
+                v-slot="{ navigate }"
+                custom
+            >
+                <IconBtn @click="navigate" iconName="trash" class="text-red" />
+            </router-link>
         </div>
     </div>
 </template>
@@ -32,11 +30,14 @@ export default {
         },
     },
     components: { IconBtn },
-    setup() {
+    setup(props) {
         const { actions } = inject("store");
+
+        const mapTo = (name) => ({ name, params: { id: props.note.id } });
 
         return {
             actions,
+            mapTo,
         };
     },
 };

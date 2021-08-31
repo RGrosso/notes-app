@@ -1,15 +1,21 @@
 <template>
     <div class="modal-footer">
         <button
-            type="button"
-            class="btn btn-outline-primary"
-            data-bs-dismiss="modal"
             @click="() => onClose()"
+            :class="`btn-${closeBtnVariant}`"
+            class="btn"
+            data-bs-dismiss="modal"
+            type="button"
         >
-            Close
+            {{ closeBtnText }}
         </button>
-        <button @click="() => onSave()" type="button" class="btn btn-primary">
-            Save changes
+        <button
+            @click="() => onSubmit()"
+            :class="`btn-${submitBtnVariant}`"
+            class="btn btn-primary"
+            type="button"
+        >
+            {{ submitBtnText }}
         </button>
     </div>
 </template>
@@ -21,9 +27,25 @@ export default {
             type: Function,
             default: () => {},
         },
-        onSave: {
+        onSubmit: {
             type: Function,
             default: () => {},
+        },
+        submitBtnText: {
+            type: String,
+            default: "Submit",
+        },
+        closeBtnText: {
+            type: String,
+            default: "Close",
+        },
+        submitBtnVariant: {
+            type: String,
+            default: "primary",
+        },
+        closeBtnVariant: {
+            type: String,
+            default: "outline-dark",
         },
     },
 };
