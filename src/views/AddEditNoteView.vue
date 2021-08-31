@@ -38,7 +38,6 @@
 
 <script>
 import { reactive, inject } from "vue";
-import { v4 as uuid } from "uuid";
 import router from "@/router/index.js";
 import BModalFooter from "@/components/BModalFooter.vue";
 
@@ -84,11 +83,6 @@ export default {
                 form.text = noteData.text;
                 editingNote = true;
             }
-        }
-
-        // if the form (note) does not have an id then it is new and requires one
-        if (form.id === null) {
-            form.id = uuid();
         }
 
         /**
