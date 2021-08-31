@@ -64,6 +64,18 @@ const getters = {
 
         return state.notes.find((note) => note.id === id);
     },
+    getRecentNotesBy({ property = "createdAt", descending = true }) {
+        const notes = [...state.notes].sort(function (a, b) {
+            a = new Date(a[property]);
+            b = new Date(b[property]);
+            return a > b ? -1 : a < b ? 1 : 0;
+        });
+
+        if (descending) {
+            return notes;
+        }
+        return notes.reverse();
+    },
 };
 
 const initialiseNotes = () => {

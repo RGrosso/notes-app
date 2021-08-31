@@ -1,41 +1,36 @@
 <template>
     <div class="container">
-        <div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
             <h1>Notes</h1>
             <router-link
                 :to="{ name: 'New Note' }"
                 custom
                 v-slot="{ href, navigate }"
             >
-                <a :href="href" @click="navigate" class="btn btn-primary mb-3">
-                    Create note
+                <a :href="href" @click="navigate" class="btn btn-primary">
+                    <i class="fas fa-plus" /> Create note
                 </a>
             </router-link>
-            <div
-                v-if="store.state.notes.length > 0"
-                class="d-flex flex-gap mb-3"
-            >
-                <NoteCard
-                    v-for="note in store.state.notes"
-                    :key="note.id"
-                    :note="note"
-                />
-            </div>
-            <p v-else>You currently have no notes available.</p>
-
-            <router-view v-slot="{ Component }">
-                <BModal
-                    :id="modalId"
-                    :onClose="navigateToNotes"
-                    :title="router.currentRoute.value.meta.title"
-                >
-                    <component
-                        :is="Component"
-                        :navigateBack="navigateToNotes"
-                    />
-                </BModal>
-            </router-view>
         </div>
+
+        <div v-if="store.state.notes.length > 0" class="row g-2 mb-3">
+            <NoteCard
+                v-for="note in store.state.notes"
+                :key="note.id"
+                :note="note"
+            />
+        </div>
+        <p v-else>You currently have no notes available.</p>
+
+        <router-view v-slot="{ Component }">
+            <BModal
+                :id="modalId"
+                :onClose="navigateToNotes"
+                :title="router.currentRoute.value.meta.title"
+            >
+                <component :is="Component" :navigateBack="navigateToNotes" />
+            </BModal>
+        </router-view>
     </div>
 </template>
 
