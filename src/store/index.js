@@ -2,18 +2,13 @@ import { reactive } from "vue";
 import { v4 as uuid } from "uuid";
 
 const state = reactive({
-    notes: [
-        {
-            id: "12324",
-            createdAt: "2021-08-19T18:48:19.427Z",
-            updatedAt: "2021-08-19T18:48:19.427Z",
-            title: "Title Example",
-            text: "The note text goes here",
-        },
-    ],
+    notes: [],
 });
 
 const methods = {
+    setNotes({ notes }) {
+        state.notes = notes;
+    },
     createNote({ title, text }) {
         let timestamp = new Date();
         let note = {
@@ -42,7 +37,7 @@ const methods = {
         });
     },
     updateLocalStorage() {
-        //
+        localStorage.setItem("notes", JSON.stringify(state.notes));
     },
 };
 
@@ -70,6 +65,30 @@ const getters = {
         return state.notes.find((note) => note.id === id);
     },
 };
+
+const initialiseNotes = () => {
+    const notes = localStorage.getItem("notes");
+    let userHasNotes = false;
+
+    if (notes) {
+        const parsedNotes = JSON.parse(notes);
+        if (parsedNotes) {
+            methods.setNotes({ notes: parsedNotes });
+            userHasNotes = true;
+        }
+    }
+
+    if (userHasNotes) {
+        return;
+    }
+
+    actions.createNote({
+        title: "Your first note",
+        text: "Create, edit or delete notes",
+    });
+};
+
+initialiseNotes();
 
 export default {
     state,

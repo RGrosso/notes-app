@@ -5,7 +5,6 @@
             <p class="card-text">
                 {{ note.text }}
             </p>
-            <p>{{ note.id }}</p>
             <router-link
                 :to="{ name: 'Edit Note', params: { id: note.id } }"
                 custom
